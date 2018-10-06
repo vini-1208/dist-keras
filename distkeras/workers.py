@@ -6,15 +6,15 @@ algorithms.
 
 ## BEGIN Imports. ##############################################################
 
-from distkeras.networking import connect
-from distkeras.networking import recv_data
-from distkeras.networking import send_data
+from distkeras1.networking import connect
+from distkeras1.networking import recv_data
+from distkeras1.networking import send_data
 
-from distkeras.utils import deserialize_keras_model
-from distkeras.utils import serialize_keras_model
-from distkeras.utils import set_keras_base_directory
-from distkeras.utils import shuffle
-from distkeras.utils import uniform_weights
+from distkeras1.utils import deserialize_keras_model
+from distkeras1.utils import serialize_keras_model
+from distkeras1.utils import set_keras_base_directory
+from distkeras1.utils import shuffle
+from distkeras1.utils import uniform_weights
 
 from keras.optimizers import Optimizer, serialize, deserialize
 import keras.backend as K
@@ -305,10 +305,10 @@ class ADAGWorker(NetworkWorker):
     """
 
     def __init__(self, model, optimizer, loss, loss_weights, metrics=["accuracy"], features_col="features", label_col="label",
-                 batch_size=32, num_epoch=1, master_host="localhost", master_port=5000, communication_window=5):
+                 batch_size=32, num_epoch=1, class_weight = {0:1.2,1:98.8},master_host="localhost", master_port=5000, communication_window=5):
         # Initialize the parent object.
         super(ADAGWorker, self).__init__(model, optimizer, loss, loss_weights, metrics, features_col, label_col,
-                                         batch_size, num_epoch, master_host, master_port)
+                                         batch_size, num_epoch, class_weight ,master_host, master_port)
         # Initialize ADAG parameters.
         self.communication_window = communication_window
         self.iteration = 1
