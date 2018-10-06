@@ -53,7 +53,7 @@ class Worker(object):
     """
 
     def __init__(self, model, optimizer, loss, loss_weights, metrics=["accuracy"], features_col="features", label_col="label",
-                 batch_size=32, num_epoch=1, learning_rate=1.0):
+                 batch_size=32, num_epoch=1, learning_rate=1.0,class_weight = {0:1.2,1:98.8}):
         assert isinstance(optimizer, (str, Optimizer)), "'optimizer' must be a string or a Keras Optimizer instance"
         assert isinstance(features_col, (str, list)), "'features_col' must be a string or a list of strings"
         assert isinstance(label_col, (str, list)), "'label_col' must be a string or a list of strings"
@@ -72,6 +72,7 @@ class Worker(object):
         self.is_prefetching = True
         self.worker_id = -1
         self.learning_rate = learning_rate
+        self.class_weight = {0:1.2,1:98.8}
         self.num_inputs = len(self.features_column)
         self.num_outputs = len(self.label_column)
         self.current_epoch = 0
@@ -206,9 +207,9 @@ class NetworkWorker(Worker):
     """Abstract class of a worker who shares the variables using the network."""
 
     def __init__(self, model, optimizer, loss, loss_weights, metrics=["accuracy"], features_col="features", label_col="label",
-                 batch_size=32, num_epoch=1, master_host="localhost", master_port=5000, learning_rate=1.0):
+                 batch_size=32, num_epoch=1, class_weight={0:1.2,1:98.8},master_host="localhost", master_port=5000, learning_rate=1.0):
         super(NetworkWorker, self).__init__(model, optimizer, loss, loss_weights, metrics, features_col,
-                                            label_col, batch_size, num_epoch, learning_rate)
+                                            label_col, batch_size, num_epoch, learning_rate,class_weight)
         self.master_host = master_host
         self.master_port = master_port
         self.socket = None
