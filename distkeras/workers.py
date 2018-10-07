@@ -53,7 +53,7 @@ class Worker(object):
     """
 
     def __init__(self, model, optimizer, loss, loss_weights, metrics=["accuracy"], features_col="features", label_col="label",
-                 batch_size=32, num_epoch=1, learning_rate=1.0,class_weight = {0:1.2,1:98.8}):
+                 batch_size=32, num_epoch=1, learning_rate=1.0, class_weight = {0:1.2,1:98.8}):
         assert isinstance(optimizer, (str, Optimizer)), "'optimizer' must be a string or a Keras Optimizer instance"
         assert isinstance(features_col, (str, list)), "'features_col' must be a string or a list of strings"
         assert isinstance(label_col, (str, list)), "'label_col' must be a string or a list of strings"
@@ -310,10 +310,10 @@ class ADAGWorker(NetworkWorker):
     """
 
     def __init__(self, model, optimizer, loss, loss_weights, metrics=["accuracy"], features_col="features", label_col="label",
-                 batch_size=32, num_epoch=1, class_weight = {0:1.2,1:98.8},master_host="localhost", master_port=5000, communication_window=5):
+                 batch_size=32, num_epoch=1, class_weight = {0:1.2,1:98.8}, master_host="localhost", master_port=5000, communication_window=5):
         # Initialize the parent object.
         super(ADAGWorker, self).__init__(model, optimizer, loss, loss_weights, metrics, features_col, label_col,
-                                         batch_size, num_epoch, class_weight ,master_host, master_port)
+                                         batch_size, num_epoch, class_weight , master_host, master_port)
         # Initialize ADAG parameters.
         self.communication_window = communication_window
         self.iteration = 1
