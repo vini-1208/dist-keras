@@ -313,7 +313,7 @@ class ADAGWorker(NetworkWorker):
                  batch_size=32, num_epoch=1, class_weight = {0:1.2,1:98.8}, master_host="localhost", master_port=5000, communication_window=5):
         # Initialize the parent object.
         super(ADAGWorker, self).__init__(model, optimizer, loss, loss_weights, metrics, features_col, label_col,
-                                         batch_size, num_epoch, class_weight , master_host, master_port)
+                                         batch_size, num_epoch, class_weight, master_host, master_port)
         # Initialize ADAG parameters.
         self.communication_window = communication_window
         self.iteration = 1
