@@ -217,11 +217,15 @@ class NetworkWorker(Worker):
         self.disable_nagle = True
         self.training_history = []
         self.worker_id = 0
-
+        print('Inside networkWorker object'+str(self.master_host))
+        print('Inside networkWorker object'+str(self.master_port))
+        print('Inside networkWorker object'+str(self.class_weight))
+        
     def connect(self):
         """Connect with the remote parameter server."""
         self.socket = connect(self.master_host, self.master_port, self.disable_nagle)
-
+        print('inside connect..master host'+ str(self.master_host))
+        print('inside connect..master port'+ str(self.master_port))
     def pull(self):
         """Requests the center variable from the parameter server."""
         # Request a pull from the parameter server.
