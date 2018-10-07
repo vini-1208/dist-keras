@@ -209,7 +209,7 @@ class NetworkWorker(Worker):
     def __init__(self, model, optimizer, loss, loss_weights, metrics=["accuracy"], features_col="features", label_col="label",
                  batch_size=32, num_epoch=1, class_weight={0:1.2,1:98.8}, master_host="localhost", master_port=5000, learning_rate=1.0):
         super(NetworkWorker, self).__init__(model, optimizer, loss, loss_weights, metrics, features_col,
-                                            label_col, batch_size, num_epoch, learning_rate,class_weight)
+                                            label_col, batch_size, num_epoch, learning_rate, class_weight)
         self.master_host = master_host
         self.master_port = master_port
         self.socket = None
