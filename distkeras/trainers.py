@@ -828,12 +828,12 @@ class ADAG(AsynchronousDistributedTrainer):
                                    batch_size, features_col, label_col, num_epoch, master_port, class_weight, loss_weights)
         # Set algorithm parameters.
         self.communication_window = communication_window
-
+        print('Inside adag worker'+ str(self.class_weight))
     def allocate_worker(self):
         """Allocate an Adag worker."""
         worker = ADAGWorker(self.master_model, self.worker_optimizer, self.loss, self.loss_weights, self.metrics,
                             self.features_column, self.label_column, self.batch_size, self.num_epoch,  
-                            self.master_host, self.class_weight, self.master_port, self.communication_window)
+                            self.class_weight, self.master_host, self.master_port, self.communication_window)
 
         return worker
 
